@@ -27,8 +27,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: 4. 執行量化選股與推播
+    - - name: 4. 執行量化選股與推播
       env:
-        # 把剛剛鎖在保險箱的密碼，拿出來給 Python 程式使用
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-      run: python discord_bot.py
+      run: |
+        FILE_PATH=$(find . -name "discord_bot.py" -print -quit)
+        python "$FILE_PATH"
